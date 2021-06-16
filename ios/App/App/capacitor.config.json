@@ -1,0 +1,6 @@
+{
+	"appId": "com.ihaowu.shop",
+	"appName": "ihaowu",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

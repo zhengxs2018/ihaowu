@@ -1,31 +1,74 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
-  'extends': [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended'
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'plugin:vue/vue3-recommended',
+    'plugin:prettier/recommended',
+    'prettier',
   ],
+  plugins: ['@typescript-eslint', 'import'],
   parserOptions: {
-    ecmaVersion: 2020
+    parser: '@typescript-eslint/parser',
+    extraFileExtensions: ['.vue'],
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/no-deprecated-slot-attribute': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    'vue/component-name-in-template-casing': [
+      'error',
+      'kebab-case',
+      {
+        registeredComponentsOnly: false,
+        ignores: [],
+      },
+    ],
+    'vue/match-component-file-name': [
+      'error',
+      {
+        extensions: ['js', 'jsx', 'ts', 'tsx', 'vue'],
+        shouldMatchCase: false,
+      },
+    ],
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
+      files: ['**/*.ts', '**/*.vue'],
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        'import/no-extraneous-dependencies': [
+          'error',
+          {
+            devDependencies: false,
+            optionalDependencies: false,
+          },
+        ],
+      },
+    },
+    // {
+    //   files: ['*.vue'],
+    //   rules: {
+    //     // disable for setup script
+    //     '@typescript-eslint/no-unused-vars': 'off',
+    //   },
+    // },
+    {
+      files: ['**/test/**/*.{js,ts,tsx,vue}'],
       env: {
-        jest: true
-      }
-    }
-  ]
+        jest: true,
+      },
+      plugins: ['jest-dom'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        'vue/one-component-per-file': 'off',
+        'import/no-extraneous-dependencies': 'off',
+      },
+    },
+    {
+      files: ['*.{ts,js}'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        'import/no-extraneous-dependencies': 'off',
+      },
+    },
+  ],
 }

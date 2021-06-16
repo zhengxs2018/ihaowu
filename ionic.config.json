@@ -1,8 +1,8 @@
 {
+  "id": "65f27ebe",
   "name": "ihaowu",
+  "type": "vue",
   "integrations": {
     "capacitor": {}
-  },
-  "type": "vue",
-  "id": "65f27ebe"
+  }
 }
